@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prasun Timalsina</title>
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: #64b5f6;
+      text-decoration: none;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(30, 144, 255, 0.85);
+      border-radius: 40px;
+      padding: 12px 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+      display: flex;
+      gap: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      z-index: 1000;
+    }
+    nav a {
+      color: #e0e0e0;
+      position: relative;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: #90caf9;
+      transition: width 0.3s ease;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 100%;
+    }
+    nav a:hover, nav a:focus {
+      color: #90caf9;
+      outline: none;
+    }
+
+    /* Header / Hero */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0d47a1 40%, #1976d2 80%);
+      padding: 40px 20px;
+      color: #fff;
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    }
+    .hero-text {
+      flex: 1 1 400px;
+      max-width: 520px;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .hero-text h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 0.4em;
+      letter-spacing: 1.2px;
+      line-height: 1.1;
+    }
+    .hero-text h2 {
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-bottom: 1.2em;
+      color: #bbdefb;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #d0e6ffcc;
+    }
+    .hero-img {
+      flex: 1 1 320px;
+      max-width: 320px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      animation: fadeInUp 1.2s ease forwards;
+      margin-left: 40px;
+    }
+    .hero-img img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      filter: drop-shadow(0 0 5px #1976d2);
+      transition: transform 0.4s ease;
+    }
+    .hero-img img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 0;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    /* About */
+    #about {
+      background: #1a237e;
+      color: #c5cae9;
+      border-radius: 50px;
+      border: 2px solid white;
+      text-align: center;
+    }
+    #about h2 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      color: #bbdefb;
+    }
+    #about p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+      color: #e8eaf6cc;
+    }
+
+    /* Skills */
+    #skills {
+      background: #121212;
+      color: #90caf9;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+    #skills h2 {
+      text-align: center;
+      font-size: 2.6rem;
+      margin-bottom: 50px;
+      font-weight: 700;
+      color: #64b5f6;
+    }
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .skill-item {
+      width: 200px;
+      background: #263238;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      user-select: none;
+      transition: transform 0.3s ease;
+      cursor: default;
+      text-align: center;
+    }
+    .skill-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    }
+    .skill-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #bbdefb;
+    }
+    .skill-bar {
+      background: #37474f;
+      border-radius: 12px;
+      height: 14px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.15);
+    }
+    .skill-level {
+      height: 100%;
+      background: linear-gradient(90deg, #42a5f5, #1e88e5);
+      width: 0;
+      border-radius: 12px;
+      transition: width 1.4s ease;
+    }
+
+    /* Projects */
+    #projects {
+      background: #263238;
+      color: #e0e0e0;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      clip-path: polygon(0 5vh, 100% 0, 100% 95vh, 0 100%);
+    }
+    #projects h2 {
+      text-align: center;
+      font-size: 2.6rem;
+      margin-bottom: 50px;
+      font-weight: 700;
+      color: #90caf9;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .project-card {
+      background: #37474f;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.7);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      color: #e0e0e0;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.9);
+    }
+    .project-image {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      filter: brightness(0.75);
+      transition: filter 0.4s ease;
+      flex-shrink: 0;
+    }
+    .project-card:hover .project-image {
+      filter: brightness(1);
+    }
+    .project-info {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    .project-info h3 {
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #64b5f6;
+    }
+    .project-info p {
+      font-size: 1rem;
+      line-height: 1.4;
+      color: #cfd8dc;
+    }
+
+    /* Contact */
+    #contact {
+      background: #121212;
+      padding: 80px 20px 100px;
+      color: #bbdefb;
+      text-align: center;
+    }
+    #contact h2 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #64b5f6;
+    }
+    #contact p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      color: #d0e6ffcc;
+    }
+    #contact a {
+      font-weight: 600;
+      color:#90caf9;
+border-bottom: 1.5px solid transparent;
+transition: border-color 0.3s ease;
+}
+#contact a:hover,
+#contact a:focus {
+border-color: #90caf9;
+outline: none;
+}
+
+css
+Copy
+Edit
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 0.9rem;
+  color: #6a7980;
+  background: #1a1a1a;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  header {
+    clip-path: none;
+    flex-direction: column;
+    padding: 60px 20px 40px;
+  }
+  .hero-img {
+    margin-left: 0;
+    margin-top: 40px;
+  }
+  nav {
+    position: static;
+    justify-content: center;
+    border-radius: 0;
+    padding: 15px 0;
+    background: #0d47a1;
+    box-shadow: none;
+    margin-bottom: 20px;
+  }
+  nav a {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 2.4rem;
+  }
+  .hero-text h2 {
+    font-size: 1rem;
+  }
+  #about h2,
+  #skills h2,
+  #projects h2,
+  #contact h2 {
+    font-size: 2rem;
+  }
+  nav {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+</style> 
+</head>
+ <body> 
+  <nav aria-label="Primary navigation"> 
+    <a href="#about">About</a> 
+    <a href="#skills">Skills</a> 
+    <a href="#projects">Projects</a> 
+    <a href="#contact">Contact</a> 
+  </nav> 
+  <header role="banner"> 
+    <div class="hero-text"> 
+      <h1>Prasun Timalsina</h1> 
+      <h2>Bachelor of Information Technology</h2> 
+      <p>Innovative software developer passionate about crafting user-friendly applications and impactful solutions. Experienced in full-stack development, networking, and system design.</p> 
+    </div> 
+    <div class="hero-img" aria-label="Portrait image of John Doe"> <img src="pic.jpg" alt="Portrait of John Doe smiling" /> </div> </header> <section id="about" tabindex="-1" aria-labelledby="about-title" class="container"> <h2 id="about-title">About Me</h2> <p>With a solid background in information technology and a keen eye for detail, I specialize in building scalable and efficient applications. My journey through academia and real-world projects has honed my skills in software development, network architecture, and data analysis.</p> </section> <section id="skills" tabindex="-1"> <h2 id="skills-title">Skills</h2> <div class="skills-list container"> <div class="skill-item" aria-label="Skill HTML with 90 percent proficiency"> <div class="skill-title">HTML</div> <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="90" aria-label="HTML skill level 90%"> <div class="skill-level" style="width: 0;"></div> </div> </div> <div class="skill-item" aria-label="Skill CSS with 85 percent proficiency"> <div class="skill-title">CSS</div> <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85" aria-label="CSS skill level 85%"> <div class="skill-level" style="width: 0;"></div> </div> </div> <div class="skill-item" aria-label="Skill JavaScript with 80 percent proficiency"> <div class="skill-title">JavaScript</div> <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-label="JavaScript skill level 80%"> <div class="skill-level" style="width: 0;"></div> </div> </div> <div class="skill-item" aria-label="Skill Python with 75 percent proficiency"> <div class="skill-title">Python</div> <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75" aria-label="Python skill level 75%"> <div class="skill-level" style="width: 0;"></div> </div> </div> <div class="skill-item" aria-label="Skill Networking with 70 percent proficiency"> <div class="skill-title">Networking</div> <div class="skill-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="70" aria-label="Networking skill level 70%"> <div class="skill-level" style="width: 0;"></div> </div> </div> </div> </section> <section id="projects" tabindex="-1"> <h2 id="projects-title">Projects</h2> <div class="projects-grid container"> <article class="project-card" tabindex="0" aria-label="Project: Quiz App"> <img class="project-image" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80" alt="Screenshot of Quiz App" /> <div class="project-info"> <h3>Quiz App</h3> <p>A dynamic quiz application featuring multiple-choice questions, real-time scoring, and user-friendly design.</p> </div> </article>
+  <article class="project-card" tabindex="0" aria-label="Project: Network Design">
+    <img class="project-image" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Network diagram" />
+    <div class="project-info">
+      <h3>Network Design</h3>
+      <p>Comprehensive network architecture for a mid-sized company ensuring high availability and security.</p>
+    </div>
+  </article>
+
+  <article class="project-card" tabindex="0" aria-label="Project: Portfolio Website">
+    <img class="project-image" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Screenshot of Portfolio Website" />
+    <div class="project-info">
+      <h3>Portfolio Website</h3>
+      <p>Responsive and accessible portfolio website built with modern HTML5, CSS3, and JavaScript.</p>
+    </div>
+  </article>
+</div>
+</section> <section id="contact" tabindex="-1" class="container"> <h2 id="contact-title">Contact</h2> <p>Feel free to reach out for project inquiries or collaboration opportunities.</p> <p>Email: <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" aria-label="Prasun@gmail">
+  PrasunTimalsina</a></p> <p>LinkedIn: <a href="https://www.linkedin.com/in/prasun-timalsina-5aa494339/" target="_blank" rel="noopener noreferrer" aria-label="">Prasun</a></p> </section> <footer> &copy; 2025 Prasun Timalsina — Built with passion in BIT & Python at OTC </footer> <script>  </script> </body> </html> ```
+
+
+
+
+
+
+
+
+
+
+
